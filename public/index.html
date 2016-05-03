@@ -1,0 +1,185 @@
+<!DOCTYPE>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/png" href="assets/favicon/favicon.png">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+    <title>Activity Tracker</title>
+
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+    <meta name="viewport" content="width=device-width" />
+
+    <!-- Bootstrap core CSS     -->
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
+
+    <!-- Animation library for notifications   -->
+    <link href="assets/css/animate.min.css" rel="stylesheet" />
+
+    <!--  Light Bootstrap Table core CSS    -->
+    <link href="assets/css/light-bootstrap-dashboard.css" rel="stylesheet" />
+
+    <!--  CSS for Demo Purpose, don't include it in your project     -->
+    <link href="assets/css/demo.css" rel="stylesheet" />
+    <link href="assets/css/app.css" rel="stylesheet" />
+
+    <!--     Fonts and icons     -->
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
+    <link href="assets/css/pe-icon-7-stroke.css" rel="stylesheet" />
+
+</head>
+
+<body ng-app="myApp" ng-controller="MyCtrl">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+    <script src="assets/js/bootstrap-notify.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+    <script src="http://code.highcharts.com/highcharts.js"></script>
+    <script src="http://code.highcharts.com/highcharts-3d.js"></script>
+    <script src="http://code.highcharts.com/highcharts-more.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="lib/highcharts-ng.js"></script>
+    <script src="controllers/controller.js"></script>
+
+    <div class="wrapper">
+        <div class="sidebar" data-color="purple" data-image="assets/img/sidebar-3.jpg">
+
+            <div class="sidebar-wrapper">
+                <div class="logo">
+                    <a href="" class="simple-text">
+                        <i class="pe-7s-gym"></i> Activity Tracker
+                    </a>
+                </div>
+
+                <ul class="nav">
+                    <li class="active">
+                        <a href="#" ng-click="home()">
+                            <i class="pe-7s-graph"></i>
+                            <p>Home</p>
+                        </a>
+                    </li>
+                    <!-- <li>
+                        <a href="#" ng-click="userProfile()">
+                            <i class="pe-7s-user"></i>
+                            <p>User Profile</p>
+                        </a>
+                    </li> -->
+                    <li>
+                        <a href="#" ng-click="activityDistrubution()">
+                            <i class="pe-7s-note2"></i>
+                            <p>Activity Distrubution</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" ng-click="activityPerDay()">
+                            <i class="pe-7s-news-paper"></i>
+                            <p>Activty Per Day</p>
+                        </a>
+                    </li>
+                    <!-- <li>
+                        <a href="#" ng-click="health()">
+                            <i class="pe-7s-science"></i>
+                            <p>Health</p>
+                        </a>
+                    </li> -->
+                    <li>
+                        <a href="#" ng-click="about()">
+                            <i class="pe-7s-rocket"></i>
+                            <p>About</p>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="main-panel">
+            <nav class="navbar navbar-default navbar-fixed">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation-example-2">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">{{title}}</a>
+
+                    </div>
+                </div>
+            </nav>
+
+            <!-- Home -->
+            <div ng-show="homeFlag">
+                <div>
+                    <!-- Spline chart -->
+                    <highchart id="chart1" config="chartConfig" class="span9" ></highchart>
+                    <!-- Spline chart -->
+                </div>
+                <div class="currentActionContainer">
+                    <div style="margin-left: 30%;">Current Activity</div>
+                    <img ng-src="{{actionSrc}}" />
+                </div>
+            </div>
+            <!-- Home -->
+
+            <!-- Pie chart -->
+            <div ng-show="activityDistrubutionFlag">
+                <div>
+                    <div class="hc-pie" items="pieActions"></div>
+                </div>
+            </div>
+            <!-- Pie chart -->
+
+            <!-- Bar chart -->
+            <div ng-show="activityDistrubutionFlag" style="margin-top: 10px;">
+                <highchart id="chart1" config="highchartsNG"></highchart>
+                <div class="barBtn" ng-click="swapChartType();">{{chartType}}</div>
+            </div>
+            <!-- Bar chart -->
+
+            <!-- About -->
+            <div ng-show="aboutFlag">
+                <img src="assets/img/group.jpg" />
+            </div>
+            <!-- About -->
+
+            <footer class="footer">
+                <div class="container-fluid">
+                    <nav class="pull-left">
+                        <ul>
+                            <li>
+                                <a href="#" ng-click="home()">
+                                Home
+                            </a>
+                            </li>
+                            <li>
+                                <a href="#" ng-click="about()">
+                                About
+                            </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </footer>
+
+        </div>
+    </div>
+
+</body>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+
+        $.notify({
+            icon: 'pe-7s-gift',
+            message: "Welcome to <b>Activity Tracker</b> - <em>Live a Healthy Life.</em>"
+
+        }, {
+            type: 'info',
+            timer: 4000
+        });
+    });
+</script>
+
+</html>
