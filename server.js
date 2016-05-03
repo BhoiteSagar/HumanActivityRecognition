@@ -33,7 +33,7 @@ app.get('/chartData', function(req, res) {
 
 app.get('/currentAction', function(req, res) {
     // Read data and print to console
-    client.execute("select * from result where userid='TEST_USER' order by timestamp desc LIMIT 1;", function(err, result) {
+    client.execute("select * from result where user_id='TEST_USER' order by timestamp desc LIMIT 1;", function(err, result) {
         if (!err) {
             if (result.rows.length > 0) {
                 var data = result.rows[0];
