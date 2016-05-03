@@ -8,17 +8,18 @@ app.controller('MyCtrl', ['$scope', '$interval', '$timeout', '$http',
         $scope.activityDistrubutionFlag = false;
         $scope.aboutFlag = false;
         $scope.homeFlag = true;
+        $scope.activityPerDayFlag = false;
         $scope.chartType = "View Line Chart";
         $scope.title = "Dashboard";
         $scope.actionsMap = {
             "idle": 0,
-            "walking": 1,
-            "running": 2,
-            "sitting": 3,
-            "sleeping": 4,
-            "ascending stairs": 5,
-            "descending stairs": 6,
-            "standing": 7
+            "Walking": 1,
+            "Jogging": 2,
+            "Sitting": 3,
+            "Sleeping": 4,
+            "Upstairs": 5,
+            "Downstairs": 6,
+            "Standing": 7
         }
         $scope.currentActionLabel = "idle";
 
@@ -68,6 +69,7 @@ app.controller('MyCtrl', ['$scope', '$interval', '$timeout', '$http',
             $scope.activityDistrubutionFlag = false;
             $scope.aboutFlag = false;
             $scope.homeFlag = true;
+            $scope.activityPerDayFlag = false;
             getCurrentAction();
             currentActionInterval = $interval(getCurrentAction, 3000);
             activityDistrubutionInterval = undefined;
@@ -79,6 +81,7 @@ app.controller('MyCtrl', ['$scope', '$interval', '$timeout', '$http',
             $scope.activityDistrubutionFlag = false;
             $scope.aboutFlag = false;
             $scope.homeFlag = false;
+            $scope.activityPerDayFlag = false;
             activityDistrubutionInterval = undefined;
             currentActionInterval = undefined;
         };
@@ -88,6 +91,7 @@ app.controller('MyCtrl', ['$scope', '$interval', '$timeout', '$http',
             $scope.activityDistrubutionFlag = false;
             $scope.aboutFlag = false;
             $scope.homeFlag = false;
+            $scope.activityPerDayFlag = true;
             activityDistrubutionInterval = undefined;
             currentActionInterval = undefined;
         };
@@ -97,6 +101,7 @@ app.controller('MyCtrl', ['$scope', '$interval', '$timeout', '$http',
             $scope.activityDistrubutionFlag = false;
             $scope.aboutFlag = false;
             $scope.homeFlag = false;
+            $scope.activityPerDayFlag = false;
             activityDistrubutionInterval = undefined;
             currentActionInterval = undefined;
         };
@@ -106,6 +111,7 @@ app.controller('MyCtrl', ['$scope', '$interval', '$timeout', '$http',
             $scope.activityDistrubutionFlag = false;
             $scope.aboutFlag = true;
             $scope.homeFlag = false;
+            $scope.activityPerDayFlag = false;
             activityDistrubutionInterval = undefined;
             currentActionInterval = undefined;
         };
@@ -204,6 +210,71 @@ app.controller('MyCtrl', ['$scope', '$interval', '$timeout', '$http',
 
         $scope.addPoints();
         //Spline chart end
+
+        //Activity per day start
+        $scope.perhighchartsNG = {
+            options: {
+                chart: {
+                    type: 'column'
+                }
+            },
+            series: [{
+                name: 'Walking',
+                data: [49.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6]
+            }, {
+                name: 'Running',
+                data: [83.6, 78.8, 98.5, 93.4, 106.0, 84.5, 105.0]
+            }, {
+                name: 'Standing',
+                data: [48.9, 38.8, 39.3, 41.4, 47.0, 48.3, 59.0]
+            }, {
+                name: 'Sitting',
+                data: [42.4, 33.2, 34.5, 39.7, 52.6, 75.5, 57.4]
+            }, {
+                name: 'Sleeping',
+                data: [83.6, 78.8, 98.5, 93.4, 106.0, 84.5, 105.0]
+            }, {
+                name: 'Ascending stairs',
+                data: [48.9, 38.8, 39.3, 41.4, 47.0, 48.3, 59.0]
+            }, {
+                name: 'Descending Stairs',
+                data: [42.4, 33.2, 34.5, 39.7, 52.6, 75.5, 57.4]
+            }],
+            title: {
+                text: 'Activity Per Day'
+            },
+            xAxis: {
+                categories: [
+                    'Mon',
+                    'Tue',
+                    'Wed',
+                    'Thu',
+                    'Fri',
+                    'Sat',
+                    'Sun'
+                ],
+                crosshair: true
+            },
+            yAxis: {
+                min: 0
+            },
+            tooltip: {
+                headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                    '<td style="padding:0"><b>{point.y:.1f}</b></td></tr>',
+                footerFormat: '</table>',
+                shared: true,
+                useHTML: true
+            },
+            plotOptions: {
+                column: {
+                    pointPadding: 0.2,
+                    borderWidth: 0
+                }
+            },
+            loading: false
+        }
+        //Activity per day end
     }
 ]);
 

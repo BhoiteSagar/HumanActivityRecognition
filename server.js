@@ -5,7 +5,7 @@ var app = express();
 
 var cassandra = require('cassandra-driver');
 var client = new cassandra.Client({
-    contactPoints: ['104.197.95.54'],
+    contactPoints: ['127.0.0.1'],
     keyspace: 'activityrecognition'
 });
 

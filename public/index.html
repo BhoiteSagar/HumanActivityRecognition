@@ -53,7 +53,7 @@
                 </div>
 
                 <ul class="nav">
-                    <li class="active">
+                    <li>
                         <a href="#" ng-click="home()">
                             <i class="pe-7s-graph"></i>
                             <p>Home</p>
@@ -137,6 +137,12 @@
                 <div class="barBtn" ng-click="swapChartType();">{{chartType}}</div>
             </div>
             <!-- Bar chart -->
+
+            <!-- Activity Per Day -->
+            <div ng-show="activityPerDayFlag">
+                <highchart id="perchart1" config="perhighchartsNG"></highchart>
+            </div>
+            <!-- Activity Per Day -->
 
             <!-- About -->
             <div ng-show="aboutFlag">

@@ -14,7 +14,7 @@ select group_and_count(prediction) from result;
 
 insert into result(userid,timestamp,prediction) values('23',1428773040502,'running');
 insert into result(userid,timestamp,prediction) values('51',1428773040530,'standing');
-select * from result where userid='TEST_USER' order by timestamp desc LIMIT 1;
+select * from result where user_id='TEST_USER' order by timestamp desc LIMIT 1;
 
 
 
