@@ -179,7 +179,7 @@ app.controller('MyCtrl', ['$scope', '$interval', '$timeout', '$http',
             var rndIdx = Math.floor(Math.random() * seriesArray.length);
             seriesArray[rndIdx].data = seriesArray[rndIdx].data.concat([$scope.actionsMap[$scope.currentActionLabel]]);
             seriesArray[rndIdx].name = capitalizeEachWord($scope.currentActionLabel);
-            $timeout($scope.addPoints, 1000);
+            $timeout($scope.addPoints, 3000);
         };
 
         $scope.chartSeries = [
